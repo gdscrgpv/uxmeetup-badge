@@ -1,48 +1,55 @@
+const uploadBtn = document.getElementById('upload-btn');
+const downloadBtn = document.getElementById('download-btn');
+const uploadedImage = document.getElementById('uploaded-image');
+const name = document.getElementById('name');
+const title = document.getElementById('title');
+const company = document.getElementById('company');
 
-const downloadCharacterSheet = () => {
-  
-  const node = document.getElementById('id-card');
-  
-  html2canvas(node).then(canvas => {
-    // document.body.appendChild(canvas)
-    // var img    = canvas.toDataURL("image/png");
-    // document.write('<img src="'+img+'"/>');
-    var link = document.createElement('a');
-    link.download = 'filename.png';
-    link.href = canvas.toDataURL()
-    link.click();
-  });
-  
-};
+uploadBtn.addEventListener('click', function() {
+	const input = document.createElement('input');
+	input.type = 'file';
+	input.accept = 'image/*';
+	input.onchange = function() {
+		const file = this.files[0];
+		if (file) {
+			const reader = new FileReader();
+			reader.onload = function() {
+				uploadedImage.src = reader.result;
+			}
+			reader.readAsDataURL(file);
+		}
+	}
+	input.click();
+});
 
-const bindInputToElement = (inputEl, elementEl) => {
-  inputEl.addEventListener('change', () => {
-    elementEl.textContent = inputEl.value;
-  });
-}
-var namechange= document.getElementById('change-name');
-var inputchange=document.getElementById('name');
+downloadBtn.addEventListener('click', function() {
+	if (uploadedImage.src === '#') {
+		alert('Please upload an image before downloading your badge.');
+		return;
+	}
+	
+	downloadBtn.disabled = true;
+	
+	html2canvas(document.querySelector('.badge')).then(canvas => {
+		const dataURL = canvas.toDataURL();
+		const link = document.createElement('a');
+		link.download = 'badge.png';
+		link.href = dataURL;
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
+		downloadBtn.disabled = false;
+	});
+});
 
-inputchange.addEventListener("input",function(){
-  namechange.innerHTML=inputchange.value;
-})
+name.addEventListener('input', function() {
+	name.innerHTML = `Name: ${this.value}`;
+});
 
-document
-  .getElementById('download-button')
-  .addEventListener('click', downloadCharacterSheet);
+title.addEventListener('input', function() {
+	title.innerHTML = `Title: ${this.value}`;
+});
 
-// Bind mugshot
-document
-    .getElementById('mugshot')
-    .addEventListener('change', function() {
-      if ( this.files && this.files[0] ) {
-        var FR= new FileReader();
-        FR.onload = function(e) {
-           var img = document.getElementById('id-card-mugshot');
-           img.src = e.target.result;
-        };       
-        FR.readAsDataURL( this.files[0] );
-      }
-    });
-
-
+company.addEventListener('input', function() {
+	company.innerHTML = `Company: ${this.value}`;
+});
