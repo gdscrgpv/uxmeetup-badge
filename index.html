@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.js"
+      integrity="sha512-sn/GHTj+FCxK5wam7k9w4gPPm6zss4Zwl/X9wgrvGMFbnedR8lTUSLdsolDRBRzsX6N+YgG6OWyvn9qaFVXH9w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <title>Bhopal UX Meetup</title>
+  </head>
+  <body>
+    <div class="ux-meetup-card">
+    <div class="heading "><span>Bhopal UX Meetup</span>
+
+    </div>
+
+      <div id="id-card">
+        <div class="id-card material-ui-shadow">
+          <div class="id-card__mugshot">
+            <img
+              src="http://www.travelcontinuously.com/wp-content/uploads/2018/04/empty-avatar.png"
+              id="id-card-mugshot"
+            />
+
+          </div>
+          <div class="id-card__details">
+            <div class="id-card__detail">
+              <span id="change-name"> Satyam Sharma </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="id-form">
+        <div class="id-form">
+          <div class="id-form__row id-form__row--inline">
+            <div class="id-form__input">
+              <input type="text" name="change-text-input" id="name" placeholder="Type your name here"/>
+              <input type="file" id="mugshot" accept="image/*" />
+            </div>
+          </div>
+        </div>
+        <button id="download-button">Download</button>
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
